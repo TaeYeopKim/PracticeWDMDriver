@@ -1,0 +1,45 @@
+;
+; SampleDriver.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider="SampleProviderTwo"
+DriverVer=
+CatalogFile=SampleDriverTwo.cat
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+SampleDriverTwo.sys=1
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%DeviceDesc%=SampleDriverTwo, SAMPLE_SIMPLEDEVICE_TWO
+
+[SampleDriverTwo]
+CopyFiles=@SampleDriverTwo.SYS
+
+[SampleDriverTwo.Services]
+AddService = SampleDriverTwo,2,Sample_Service_Inst_Two
+
+[Sample_Service_Inst_Two]
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\SampleDriverTwo.SYS
+
+[Strings]
+ManufacturerName="SampleManufacturerTwo"
+ClassName="WDM TEST CLASS"
+DiskName="SampleDriverTwo Source Disk"
+DeviceDesc="SampleDriverTwo Device"
